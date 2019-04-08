@@ -1,0 +1,80 @@
+
+slack: &slack
+  notify: false
+  slackChannel: #devops-jpm
+  slackToken:  
+
+globals: &buildenv
+  credentialId: 
+  artifactoryServername: ''
+  artifactoryFolder: 
+  filesToPackage: ''
+  filesExcludeFromPackage: '*/.gitignore,*.md,*/.coverage,python/coverage.xml'
+  dependent_artifacts: true 
+
+sonar: &sonar
+  enable: false   
+  projectKey: ''
+  projectName: ''
+  excludes: ''
+  shortLivedAnalysis: false 
+    
+# Pipeline details per environment
+environments:
+  
+  PREDEV:
+    <<: *buildenv
+    mergeConflict:
+        enable: false 
+        targetBranch: develop
+    build:
+        enable: false 
+        excludes: '' 
+    unitTest:
+        enable: false 
+        excludes: ''
+    sonar: *sonar
+    package:
+        enable: true 
+
+  DEV:
+    <<: *buildenv
+    mergeConflict:
+        enable: true 
+        targetBranch: develop
+    build:
+        enable: false 
+        excludes: '' 
+    unitTest:
+        enable: false 
+        excludes: ''
+    sonar: *sonar
+    package:
+        enable: true
+  
+  TEST:
+    <<: *buildenv
+    mergeConflict:
+        enable: true 
+        targetBranch: master
+    build:
+        enable: false 
+        excludes: '' 
+    unitTest:
+        enable: false 
+        excludes: ''
+    sonar: *sonar
+    package:
+        enable: true
+      
+  PROD:
+    <<: *buildenv
+    build:
+        enable: false 
+        excludes: '' 
+    unitTest:
+        enable: false 
+        excludes: ''
+    sonar: *sonar
+    package:
+        enable: true
