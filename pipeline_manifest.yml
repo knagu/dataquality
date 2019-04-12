@@ -9,8 +9,7 @@ globals: &buildenv
   artifactoryServername: ''
   artifactoryFolder: 
   filesToPackage: ''
-  filesExcludeFromPackage: '*/.gitignore,*.md,*/.coverage,python/coverage.xml'
-  dependent_artifacts: true 
+  filesExcludeFromPackage: ''
 
 sonar: &sonar
   enable: false   
@@ -25,13 +24,13 @@ environments:
   PREDEV:
     <<: *buildenv
     mergeConflict:
-        enable: false 
+        enable: true
         targetBranch: develop
     build:
-        enable: false 
+        enable: true
         excludes: '' 
     unitTest:
-        enable: false 
+        enable: true
         excludes: ''
     sonar: *sonar
     package:
@@ -43,10 +42,10 @@ environments:
         enable: true 
         targetBranch: develop
     build:
-        enable: false 
+        enable: true
         excludes: '' 
     unitTest:
-        enable: false 
+        enable: true
         excludes: ''
     sonar: *sonar
     package:
@@ -58,10 +57,10 @@ environments:
         enable: true 
         targetBranch: master
     build:
-        enable: false 
+        enable: true
         excludes: '' 
     unitTest:
-        enable: false 
+        enable: true
         excludes: ''
     sonar: *sonar
     package:
@@ -70,10 +69,10 @@ environments:
   PROD:
     <<: *buildenv
     build:
-        enable: false 
+        enable: true
         excludes: '' 
     unitTest:
-        enable: false 
+        enable: true
         excludes: ''
     sonar: *sonar
     package:
