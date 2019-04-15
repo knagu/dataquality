@@ -1,3 +1,3 @@
-@Library('shared_library@feature/packaging')
+@Library('shared_library@master')
 import com.library.*
-new main().execute()
+new main().start()
