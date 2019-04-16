@@ -1,3 +1,3 @@
 @Library('shared_library@master')
 import com.library.*
-new main().start("python")
+new main().start(args,"python")
